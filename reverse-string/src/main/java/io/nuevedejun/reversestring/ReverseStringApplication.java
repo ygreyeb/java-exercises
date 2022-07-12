@@ -3,7 +3,6 @@ package io.nuevedejun.reversestring;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Duration;
-import java.util.Random;
 import java.util.function.UnaryOperator;
 
 public class ReverseStringApplication {
@@ -11,12 +10,6 @@ public class ReverseStringApplication {
 
 	public static void main(String[] args) {
 		new ReverseStringApplication().start();
-	}
-
-	private final Random random;
-
-	public ReverseStringApplication() {
-		this.random = new Random();
 	}
 
 	private void start() {
@@ -30,7 +23,7 @@ public class ReverseStringApplication {
 		int times = 20_000;
 
 		for (int length : lengths) {
-			String str = randomString(length);
+			String str = Utils.randomString(length);
 
 			Duration duration = measure(() -> reverser.apply(str), times);
 			LOGGER.log(Level.INFO, buildLog(reverser.toString(), length, times, duration));
@@ -46,12 +39,6 @@ public class ReverseStringApplication {
 		sb.append("\"millis\": ").append(duration.toMillis());
 		sb.append("}");
 		return sb;
-	}
-
-	private String randomString(int size) {
-		byte[] bytes = new byte[size];
-		random.nextBytes(bytes);
-		return new String(bytes);
 	}
 
 	private Duration measure(Runnable runnable, int times) {
