@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import io.nuevedejun.utils.Utils;
+
 class StringReversersTests {
 
     private static final UnaryOperator<String> REF = StringReversers.reference();

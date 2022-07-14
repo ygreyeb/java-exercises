@@ -3,7 +3,10 @@ package io.nuevedejun.reversestring;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.time.Duration;
+import java.util.Map;
 import java.util.function.UnaryOperator;
+
+import io.nuevedejun.utils.Utils;
 
 public class ReverseStringApplication {
 	private static final Logger LOGGER = System.getLogger(ReverseStringApplication.class.getPackageName());
@@ -25,30 +28,13 @@ public class ReverseStringApplication {
 		for (int length : lengths) {
 			String str = Utils.randomString(length);
 
-			Duration duration = measure(() -> reverser.apply(str), times);
+			Duration duration = Utils.measure(() -> reverser.apply(str), times);
 			LOGGER.log(Level.INFO, buildLog(reverser.toString(), length, times, duration));
 		}
 	}
 
-	private StringBuilder buildLog(String name, int length, int times, Duration duration) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{");
-		sb.append("\"name\": \"").append(name).append("\", ");
-		sb.append("\"length\": ").append(length).append(", ");
-		sb.append("\"times\": ").append(times).append(", ");
-		sb.append("\"millis\": ").append(duration.toMillis());
-		sb.append("}");
-		return sb;
-	}
-
-	private Duration measure(Runnable runnable, int times) {
-		long elapsed = 0;
-		for (int i = 0; i < times; i++) {
-			long start = System.nanoTime();
-			runnable.run();
-			elapsed = elapsed + System.nanoTime() - start;
-		}
-		return Duration.ofNanos(elapsed);
+	private CharSequence buildLog(String name, int length, int times, Duration duration) {
+		return Utils.jsonLike(Map.of("name", name, "length", length, "times", times, "millis", duration.toMillis()));
 	}
 
 }
