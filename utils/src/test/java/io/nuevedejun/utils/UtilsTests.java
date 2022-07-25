@@ -9,7 +9,9 @@ import static org.mockito.Mockito.verify;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -78,6 +80,32 @@ class UtilsTests {
     void testJsonLikeNull() {
         String str = Utils.jsonLike(null).toString();
         assertEquals("null", str);
+    }
+
+    @Test
+    void testStreamOfBytes() {
+        byte[] bytes = { 0b101, 0b100, 0b1 };
+        Stream<Byte> stream = Utils.streamOf(bytes);
+
+        assertTrue(haveSameElements(bytes, stream));
+    }
+
+    private boolean haveSameElements(byte[] bytes, Stream<Byte> stream) {
+        List<Byte> list = stream.toList();
+        for (int i = 0; i < bytes.length; i++) {
+            if (!list.get(i).equals(bytes[i])) {
+                return false;
+            }
+        }
+        return bytes.length == list.size();
+    }
+
+    @Test
+    void testJoinBytes() {
+        Stream<Byte> bytes = Stream.of(0b101, 0b100, 0b1).map(Integer::byteValue);
+        String str = Utils.join(bytes, " ");
+
+        assertEquals("00000101 00000100 00000001", str);
     }
 
 }

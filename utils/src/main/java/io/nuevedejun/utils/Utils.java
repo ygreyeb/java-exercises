@@ -1,8 +1,13 @@
 package io.nuevedejun.utils;
 
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Utils {
     private static final Random RAND = new Random();
@@ -77,6 +82,45 @@ public class Utils {
         }
         sb.append("}");
         return sb;
+    }
+
+    /**
+     * Joins all the bytes in the stream into a single string.
+     * 
+     * @param bytes     the byte stream
+     * @param delimiter delimiter between each byte
+     * @return the string representation
+     */
+    public static String join(Stream<Byte> bytes, CharSequence delimiter) {
+        return bytes.map(Byte::intValue).map(Integer::toBinaryString)
+                .map(s -> ("0000000" + s).substring(s.length() - 1))
+                .collect(Collectors.joining(delimiter));
+    }
+
+    /**
+     * Returns a sequential stream of bytes containing the bytes in the array.
+     * 
+     * @param bytes the byte array
+     * @return the stream of bytes
+     */
+    public static Stream<Byte> streamOf(byte[] bytes) {
+        Iterable<Byte> iterable = () -> new Iterator<>() {
+            int pos = 0;
+
+            @Override
+            public boolean hasNext() {
+                return pos < bytes.length;
+            }
+
+            @Override
+            public Byte next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException("there are no more bytes in the array");
+                }
+                return bytes[pos++];
+            }
+        };
+        return StreamSupport.stream(iterable.spliterator(), false);
     }
 
 }
