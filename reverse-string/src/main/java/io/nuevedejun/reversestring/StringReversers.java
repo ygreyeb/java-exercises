@@ -36,7 +36,7 @@ public class StringReversers {
     }
 
     private static UnaryOperator<String> create(String name, UnaryOperator<String> impl) {
-        return new UnaryOperator<String>() {
+        return new UnaryOperator<>() {
             @Override
             public String apply(String str) {
                 return impl.apply(str);

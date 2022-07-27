@@ -1,13 +1,13 @@
 package io.nuevedejun.isprime;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.function.UnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PrimeFiltersTests {
 
@@ -236,10 +236,10 @@ class PrimeFiltersTests {
         if (expected.length != result.length) {
             return false;
         }
-        for (int i = 0; i < expected.length; i++) {
+        for (int k : expected) {
             boolean found = false;
             for (int j = 0; j < result.length && !found; j++) {
-                if (expected[i] == result[j]) {
+                if (k == result[j]) {
                     found = true;
                 }
             }

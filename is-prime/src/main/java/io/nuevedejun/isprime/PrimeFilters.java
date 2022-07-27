@@ -76,7 +76,7 @@ public class PrimeFilters {
     }
 
     private static UnaryOperator<int[]> create(String name, UnaryOperator<int[]> impl) {
-        return new UnaryOperator<int[]>() {
+        return new UnaryOperator<>() {
             @Override
             public int[] apply(int[] numbers) {
                 return impl.apply(numbers);

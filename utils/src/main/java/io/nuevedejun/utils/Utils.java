@@ -54,7 +54,7 @@ public class Utils {
     }
 
     /**
-     * Takes a map and creates an string representation of it similar to a JSON
+     * Takes a map and creates a string representation of it similar to a JSON
      * string.
      * 
      * @param obj the map of object properties

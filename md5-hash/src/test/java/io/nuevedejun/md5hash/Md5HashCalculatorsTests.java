@@ -1,13 +1,11 @@
 package io.nuevedejun.md5hash;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.security.NoSuchAlgorithmException;
-import java.util.function.Function;
-
+import io.nuevedejun.utils.Utils;
 import org.junit.jupiter.api.Test;
 
-import io.nuevedejun.utils.Utils;
+import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Md5HashCalculatorsTests {
     private static final Function<String, byte[]> REF = Md5HashCalculators.reference();
@@ -17,7 +15,7 @@ class Md5HashCalculatorsTests {
     private static final int MAX_STR_SIZE = 1000;
 
     @Test
-    void testFirst() throws NoSuchAlgorithmException {
+    void testFirst() {
         Function<String, byte[]> calculator = Md5HashCalculators.first();
 
         for (int i = 0; i < COMPARISONS; i++) {

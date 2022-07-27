@@ -155,17 +155,11 @@ public class Md5HashCalculators {
         int bytePos = bytes.length;
         int bit = 0x80000000;
         switch (0b11 & bytePos) {
-            case 1:
-                bit = 0x00800000;
-                break;
-            case 2:
-                bit = 0x00008000;
-                break;
-            case 3:
-                bit = 0x00000080;
-                break;
-            default:
-                break;
+            case 1 -> bit = 0x00800000;
+            case 2 -> bit = 0x00008000;
+            case 3 -> bit = 0x00000080;
+            default -> {
+            }
         }
         ints[bytePos >> 2] |= bit;
         ints[ints.length - 1] = bytes.length << 3;
@@ -178,7 +172,7 @@ public class Md5HashCalculators {
     }
 
     private static Function<String, byte[]> create(String name, Function<String, byte[]> impl) {
-        return new Function<String, byte[]>() {
+        return new Function<>() {
             @Override
             public byte[] apply(String str) {
                 return impl.apply(str);
