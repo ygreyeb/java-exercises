@@ -47,7 +47,6 @@
 	<modules>
 		<module>reverse-string</module>
 		<module>is-prime</module>
-		<module>singleton</module>
 		<module>md5-hash</module>
 		<module>utils</module>
 	</modules>
