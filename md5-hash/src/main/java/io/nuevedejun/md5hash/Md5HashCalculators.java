@@ -29,7 +29,7 @@ public class Md5HashCalculators {
                 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
                 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
                 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
-                6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21 };
+                6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21};
 
         // constants
         final int[] ks = {
@@ -48,7 +48,7 @@ public class Md5HashCalculators {
                 0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
                 0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
                 0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
-                0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 };
+                0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391};
 
         return create("first", str -> {
             byte[] strBytes = str.getBytes();
@@ -101,7 +101,7 @@ public class Md5HashCalculators {
             }
 
             byte[] result = new byte[16];
-            copyBits(new int[] { a0, b0, c0, d0 }, result);
+            copyBits(new int[]{a0, b0, c0, d0}, result);
             return result;
         });
     }
@@ -109,7 +109,7 @@ public class Md5HashCalculators {
     /**
      * Calculates the required length for the <strong>integer</strong> array that
      * will hold the original bytes plus the end padding.
-     * 
+     *
      * @param length the length of the <strong>byte</strong> array of the input
      *               string
      * @return length of the integer array
@@ -153,13 +153,12 @@ public class Md5HashCalculators {
 
     private static void addPadding(byte[] bytes, int[] ints) {
         int bytePos = bytes.length;
-        int bit = 0x80000000;
+        int bit;
         switch (0b11 & bytePos) {
             case 1 -> bit = 0x00800000;
             case 2 -> bit = 0x00008000;
             case 3 -> bit = 0x00000080;
-            default -> {
-            }
+            default -> bit = 0x80000000;
         }
         ints[bytePos >> 2] |= bit;
         ints[ints.length - 1] = bytes.length << 3;
