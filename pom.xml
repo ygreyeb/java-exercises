@@ -45,9 +45,10 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>reverse-string</module>
 		<module>is-prime</module>
 		<module>md5-hash</module>
+		<module>phone-decoder</module>
+		<module>reverse-string</module>
 		<module>utils</module>
 	</modules>
 
