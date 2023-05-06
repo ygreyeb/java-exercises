@@ -49,6 +49,7 @@
 		<module>md5-hash</module>
 		<module>phone-decoder</module>
 		<module>reverse-string</module>
+		<module>leetcode-solutions</module>
 		<module>utils</module>
 	</modules>
 
