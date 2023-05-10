@@ -1,5 +1,7 @@
 package io.nuevedejun.leetcode.addtwonumbers;
 
+import io.nuevedejun.leetcode.utils.ListNode;
+
 public class Solution {
   public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     int[] result = new int[101];
@@ -35,15 +37,5 @@ public class Solution {
       next = new ListNode(result[i], next);
     }
     return next;
-  }
-
-  public static class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int val, ListNode next) {
-      this.val = val;
-      this.next = next;
-    }
   }
 }

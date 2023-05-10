@@ -2,17 +2,11 @@ package io.nuevedejun.leetcode.diagonalsum;
 
 import org.junit.jupiter.api.Test;
 
+import static io.nuevedejun.leetcode.utils.TestUtils.m;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolutionTest {
   final Solution solution = new Solution();
-
-  private static int[][] m(int l, int... values) {
-    int[][] matrix = new int[l][l];
-    for (int i = 0; i < l; i++)
-      System.arraycopy(values, i * l, matrix[i], 0, l);
-    return matrix;
-  }
 
   @Test
   void diagonalSum0() {

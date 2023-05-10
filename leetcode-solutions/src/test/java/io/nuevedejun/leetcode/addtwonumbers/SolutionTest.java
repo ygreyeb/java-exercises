@@ -1,10 +1,9 @@
 package io.nuevedejun.leetcode.addtwonumbers;
 
-import io.nuevedejun.leetcode.addtwonumbers.Solution.ListNode;
 import org.junit.jupiter.api.Test;
 
-import java.util.stream.Stream;
-
+import static io.nuevedejun.leetcode.utils.TestUtils.ln;
+import static io.nuevedejun.leetcode.utils.TestUtils.same;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SolutionTest {
@@ -23,23 +22,5 @@ class SolutionTest {
   @Test
   void addTwoNumbers2() {
     assertTrue(same(ln(8, 9, 9, 9, 0, 0, 0, 1), solution.addTwoNumbers(ln(9, 9, 9, 9, 9, 9, 9), ln(9, 9, 9, 9))));
-  }
-
-  private boolean same(ListNode... listNodes) {
-    ListNode pivot = listNodes[0];
-    boolean valMatch = Stream.of(listNodes).skip(1).allMatch(node -> {
-      if (pivot == null) return node == null;
-      else return pivot.val == node.val;
-    });
-    return valMatch && (pivot == null ||
-        same(Stream.of(listNodes).map(node -> node.next).toArray(ListNode[]::new)));
-  }
-
-  private ListNode ln(int... elements) {
-    ListNode next = null;
-    for (int i = elements.length - 1; i >= 0; i--) {
-      next = new ListNode(elements[i], next);
-    }
-    return next;
   }
 }
