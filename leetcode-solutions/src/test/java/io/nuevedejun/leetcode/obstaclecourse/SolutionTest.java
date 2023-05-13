@@ -2,12 +2,7 @@ package io.nuevedejun.leetcode.obstaclecourse;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static java.util.Objects.requireNonNull;
+import static io.nuevedejun.leetcode.utils.TestUtils.fromFile;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class SolutionTest {
@@ -35,32 +30,30 @@ class SolutionTest {
   }
 
   @Test
-  void longestObstacleCourseAtEachPosition4() throws URISyntaxException, IOException {
+  void longestObstacleCourseAtEachPosition4() throws Exception {
     testReadingFromFile("obstacle-course-test4.txt");
   }
 
   @Test
-  void longestObstacleCourseAtEachPosition5() throws URISyntaxException, IOException {
+  void longestObstacleCourseAtEachPosition5() throws Exception {
     testReadingFromFile("obstacle-course-test5.txt");
   }
 
-  private void testReadingFromFile(final String name) throws URISyntaxException, IOException {
-    int[] obstacles;
-    int[] expected;
-
-    try (var reader = Files.newBufferedReader(
-        Paths.get(requireNonNull(getClass().getClassLoader().getResource(name)).toURI()))) {
-      String[] strings = reader.readLine().split(",");
-      obstacles = new int[strings.length];
+  private void testReadingFromFile(final String name) throws Exception {
+    fromFile(name, line -> {
+      String[] strings = line.get().split(",");
+      int[] obstacles = new int[strings.length];
       for (int i = 0; i < strings.length; i++) {
         obstacles[i] = Integer.parseInt(strings[i]);
       }
-      strings = reader.readLine().split(",");
-      expected = new int[strings.length];
+
+      strings = line.get().split(",");
+      int[] expected = new int[strings.length];
       for (int i = 0; i < strings.length; i++) {
         expected[i] = Integer.parseInt(strings[i]);
       }
-    }
-    assertArrayEquals(expected, solution.longestObstacleCourseAtEachPosition(obstacles));
+
+      assertArrayEquals(expected, solution.longestObstacleCourseAtEachPosition(obstacles));
+    });
   }
 }

@@ -2,12 +2,7 @@ package io.nuevedejun.leetcode.issubsequence;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static java.util.Objects.requireNonNull;
+import static io.nuevedejun.leetcode.utils.TestUtils.fromFile;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SolutionTest {
@@ -44,25 +39,20 @@ class SolutionTest {
   }
 
   @Test
-  void isSubsequence6() throws URISyntaxException, IOException {
+  void isSubsequence6() throws Exception {
     testReadingFromFile("is-subsequence-test6.txt", true);
   }
 
   @Test
-  void isSubsequence7() throws URISyntaxException, IOException {
+  void isSubsequence7() throws Exception {
     testReadingFromFile("is-subsequence-test7.txt", false);
   }
 
-  private void testReadingFromFile(final String name, final boolean expected) throws URISyntaxException, IOException {
-    String str;
-    String substr;
-
-    try (var reader = Files.newBufferedReader(
-        Paths.get(requireNonNull(getClass().getClassLoader().getResource(name)).toURI()))) {
-      str = reader.readLine();
-      substr = reader.readLine();
-    }
-
-    assertEquals(expected, solution.isSubsequence(substr, str));
+  private void testReadingFromFile(final String name, final boolean expected) throws Exception {
+    fromFile(name, line -> {
+      String str = line.get();
+      String substr = line.get();
+      assertEquals(expected, solution.isSubsequence(substr, str));
+    });
   }
 }
